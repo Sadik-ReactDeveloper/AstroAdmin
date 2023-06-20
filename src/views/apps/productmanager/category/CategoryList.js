@@ -242,7 +242,7 @@ class CategoryList extends React.Component {
                             )
                           }
                         >
-                          Add
+                          Add Category
                         </Button>
                       )}
                     />

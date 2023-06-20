@@ -12,7 +12,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-import axios from "axios";
+
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
@@ -86,32 +86,30 @@ class AstrologerList extends React.Component {
           );
         },
       },
-      {
-        headerName: "Gender",
-        field: "gender",
-        filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.gender}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "DOB",
-        field: "dob",
-        filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.dob}</span>
-            </div>
-          );
-        },
-      },
+      // {
+      //   headerName: "Gender",
+      //   field: "gender",
+      //   filter: true,
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return <div>
+      //       <span>{params?.data?.gender}</span>
+      //     </div>;
+      //   },
+      // },
+      // {
+      //   headerName: "DOB",
+      //   field: "dob",
+      //   filter: true,
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div>
+      //         <span>{params.data.dob}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
         headerName: "Primary Skills",
         field: "primary_skills",
@@ -336,7 +334,7 @@ class AstrologerList extends React.Component {
                       Astrologer List
                     </h1>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <Route
                       render={({ history }) => (
                         <Button
@@ -349,7 +347,7 @@ class AstrologerList extends React.Component {
                         </Button>
                       )}
                     />
-                  </Col>
+                  </Col> */}
                 </Row>
                 <CardBody>
                   {this.state.rowData === null ? null : (
@@ -405,10 +403,10 @@ class AstrologerList extends React.Component {
                           <div className="table-input mr-1">
                             <Input
                               placeholder="search..."
+                              value={this.state.value}
                               onChange={(e) =>
                                 this.updateSearchQuery(e.target.value)
                               }
-                              value={this.state.value}
                             />
                           </div>
                           <div className="export-btn">

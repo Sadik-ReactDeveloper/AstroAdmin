@@ -1,5 +1,5 @@
 import React from "react";
-import { IntlProvider, FormattedMessage, useIntl } from "react-intl";
+
 import * as Icon from "react-feather";
 const navigationConfig = [
   {
@@ -41,163 +41,6 @@ const navigationConfig = [
     ],
   },
 
-  // {
-  //   type: "groupHeader",
-  //   groupTitle: "Kundli Management",
-  // },
-
-  // {
-  //   id: "kundlidetail",
-  //   title: "Kundli Detail Users",
-  //   type: "item",
-  //   icon: <Icon.BarChart2 size={20} />,
-  //   permissions: ["admin", "editor"],
-  //   navLink: "/app/kundlimanage/kundliuserdetail",
-  // },
-
-  // {
-  //   id: "kundlimatch",
-  //   title: "Kundli Match Users",
-  //   type: "item",
-  //   icon: <Icon.BarChart2 size={20} />,
-  //   permissions: ["admin", "editor"],
-  //   navLink: "/app/kundlimanage/kundlimatchlist",
-  // },
-
-  // {
-  //   type: "groupHeader",
-  //   groupTitle: "Horoscopes",
-  // },
-  // {
-  //   id: "horoscopes",
-  //   title: "Horoscopes",
-  //   type: "collapse",
-  //   icon: <Icon.Box size={20} />,
-  //   children: [
-  //     {
-  //       id: "horoscopeList",
-  //       title: "Horoscope ",
-  //       type: "item",
-  //       icon: <Icon.FileText size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/horoscopes/horoscopesList",
-  //     },
-
-  //     //     {
-  //     //       id: "todayHoroscopeList",
-  //     //       title: "Today Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/todayshoroscope/todayHoroscopeList",
-  //     //     },
-
-  //     //     {
-  //     //       id: "weeklyHoroscopeList",
-  //     //       title: "Weekly Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/weeklyhoroscope/weeklyHoroscopeList",
-  //     //     },
-
-  //     //     {
-  //     //       id: "monthlyHoroscopeList",
-  //     //       title: "Monthly Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/monthlyhoroscope/monthlyHoroscopeList",
-  //     //     },
-
-  //     //     {
-  //     //       id: "yearlyHoroscopeList",
-  //     //       title: "Yearly Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/yearlyhoroscope/yearlyHoroscopeList",
-  //     //     },
-
-  //     //     {
-  //     //       id: "dailyHoroscopeList",
-  //     //       title: "Daily Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/dailyhoroscope/dailyHoroscopeList",
-  //     //     },
-
-  //     //     {
-  //     //       id: "tomorrowHoroscopeList",
-  //     //       title: "Tomorrow Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/tomorrowhoroscope/tomorrowHoroscopeList",
-  //     //     },
-
-  //     //     {
-  //     //       id: "yesterdayHoroscopeList",
-  //     //       title: "Yesterday Horoscope",
-  //     //       type: "item",
-  //     //       icon: <Icon.FileText size={12} />,
-  //     //       permissions: ["admin", "editor"],
-  //     //       navLink: "/app/horoscopes/yesterdayhoroscope/yesterdayHoroscopeList",
-  //     //     },
-
-  //     //     // {
-  //     //     //   id: "YearlyHoroscopeList",
-  //     //     //   title: "Yearly Horoscope",
-  //     //     //   type: "item",
-  //     //     //   icon: <Icon.FileText size={20} />,
-  //     //     //   permissions: ["admin", "editor"],
-  //     //     //   navLink: "/app/horoscopes/yearlyhoroscope/YearlyHoroscopeList",
-  //     //     // },
-  //   ],
-  // },
-  // {
-  //   id: "horoscopesList",
-  //   title: "Horoscopes List44",
-  //   type: "item",
-  //   icon: <Icon.Box size={20} />,
-  //   permissions: ["admin", "editor"],
-  //   navLink: "/app/horoscopes/horoscopesList",
-  // },
-
-  // {
-  //   id: "horoscopeCategoryList",
-  //   title: "Horoscope Category",
-  //   type: "item",
-  //   icon: <Icon.Box size={20} />,
-  //   permissions: ["admin", "editor"],
-  //   navLink: "/app/horoscopecategory/horoscopeCategoryList",
-  // },
-  // {
-  //   id: "rashimanagement",
-  //   title: "Rashi Management",
-  //   type: "collapse",
-  //   icon: <Icon.BarChart2 size={20} />,
-  //   children: [
-  //     {
-  //       id: "rashi",
-  //       title: "Rashi List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/rashimanagement/rashi/rashiList",
-  //     },
-  //     {
-  //       id: "rashiHoroscopeList",
-  //       title: "Rashi Horoscope List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/rashimanagement/rashihoroscope/rashiHoroscopeList",
-  //     },
-  //   ],
-  // },
-
   {
     type: "groupHeader",
     groupTitle: "Order Management",
@@ -219,6 +62,7 @@ const navigationConfig = [
     id: "rashimanagement",
     title: "Book Puja",
     type: "collapse",
+    // icon: <Icon.FileText size={12} />,
     icon: <Icon.BarChart2 size={20} />,
     children: [
       {
@@ -290,13 +134,13 @@ const navigationConfig = [
     id: "callstatus",
     title: "Call Management",
     type: "collapse",
-    icon: <Icon.PhoneCall size={20} />,
+    icon: <Icon.PhoneCall size={20} color="yellow" />,
     children: [
       {
         id: "callComplete",
         title: "Complete Call",
         type: "item",
-        icon: <Icon.PhoneIncoming size={12} />,
+        icon: <Icon.PhoneIncoming size={12} color="green" />,
         permissions: ["admin", "editor"],
         navLink: "/app/callmanagement/completecall",
       },
@@ -304,7 +148,7 @@ const navigationConfig = [
         id: "callreject",
         title: "Reject Call",
         type: "item",
-        icon: <Icon.PhoneMissed size={12} />,
+        icon: <Icon.PhoneMissed size={12} color="red" />,
         permissions: ["admin", "editor"],
         navLink: "/app/callmanagement/callreject",
       },
@@ -312,7 +156,7 @@ const navigationConfig = [
         id: "calltansaction",
         title: "Call Transac. History",
         type: "item",
-        icon: <Icon.PhoneMissed size={12} />,
+        icon: <Icon.PhoneMissed size={12} color="red" />,
         permissions: ["admin", "editor"],
         navLink: "",
       },
@@ -323,7 +167,7 @@ const navigationConfig = [
     id: "chatlist",
     title: "Chat List",
     type: "item",
-    icon: <Icon.MessageCircle size={20} />,
+    icon: <Icon.List size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/chat/chatList",
   },
@@ -365,7 +209,7 @@ const navigationConfig = [
         id: "allPlan",
         title: "All Plan List",
         type: "item",
-        icon: <Icon.Circle size={12} />,
+        icon: <Icon.List size={12} />,
         permissions: ["admin", "editor"],
         navLink: "/app/packagemanager/allPlan",
       },
@@ -373,7 +217,7 @@ const navigationConfig = [
         id: "userrecharge",
         title: "User Recharge",
         type: "item",
-        icon: <Icon.Circle size={12} />,
+        icon: <Icon.Circle size={20} />,
         permissions: ["admin", "editor"],
         navLink: "/app/packagemanager/userrecharge",
       },
@@ -435,7 +279,14 @@ const navigationConfig = [
     id: "withdrawrequest",
     title: "Withdraw Request ",
     type: "item",
-    icon: <Icon.DollarSign size={20} />,
+    icon: (
+      <span
+        style={{ fontSize: "20px", marginRight: "10px", fontWeight: "600" }}
+      >
+        ₹
+      </span>
+    ),
+    // icon: <Icon.Circle size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/withdraw/WithdrawRequest",
   },
@@ -468,7 +319,7 @@ const navigationConfig = [
     id: "commissionset",
     title: "Commission Set ",
     type: "item",
-    icon: <Icon.DollarSign size={20} />,
+    icon: <Icon.Circle size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/packagemanager/commission",
   },
@@ -476,7 +327,14 @@ const navigationConfig = [
     id: "payouts",
     title: "Payouts ",
     type: "item",
-    icon: <Icon.DollarSign size={20} />,
+    // icon: <Icon.Circle size={20} />,
+    icon: (
+      <span
+        style={{ fontSize: "20px", marginRight: "10px", fontWeight: "600" }}
+      >
+        ₹
+      </span>
+    ),
     permissions: ["admin", "editor"],
     navLink: "/app/report/payoutlist",
   },
@@ -484,7 +342,7 @@ const navigationConfig = [
     id: "socialmedia",
     title: "Social Media",
     type: "item",
-    icon: <Icon.DollarSign size={20} />,
+    icon: <Icon.Circle size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/media/socialmedia",
   },
@@ -492,7 +350,7 @@ const navigationConfig = [
     id: "otherpages",
     title: "Other Pages",
     type: "item",
-    icon: <Icon.DollarSign size={20} />,
+    icon: <Icon.Circle size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/otherpages/otherpage",
   },
@@ -500,7 +358,7 @@ const navigationConfig = [
     id: "transaction",
     title: "All Transaction",
     type: "item",
-    icon: <Icon.DollarSign size={20} />,
+    icon: <Icon.Circle size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/transaction/transactionHistory",
   },
