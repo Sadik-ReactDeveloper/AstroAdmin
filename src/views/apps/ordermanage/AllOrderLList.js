@@ -12,7 +12,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-import axios from "axios";
+
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
@@ -93,11 +93,7 @@ class AllOrderList extends React.Component {
         filter: true,
         width: 120,
         cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data?.product}</span>
-            </div>
-          );
+          return <div>{/* <span>{params?.data?.product}</span> */}</div>;
         },
       },
 

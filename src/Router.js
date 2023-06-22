@@ -769,7 +769,7 @@ class AppRouter extends React.Component {
               component={EditAstrologer}
             />
             <AppRoute
-              path="/app/astrology/viewAstrologer"
+              path="/app/astrology/viewAstrologer/:id"
               component={ViewAstrologer}
             />
             {/* Call Management */}

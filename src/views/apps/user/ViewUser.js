@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Card,
   CardBody,
@@ -7,46 +7,38 @@ import {
   Button,
   Breadcrumb,
   BreadcrumbItem,
-} from 'reactstrap'
-import { history } from '../../../history'
-import '../../../assets/scss/pages/app-ecommerce-shop.scss'
-import '../../../assets/scss/pages/users.scss'
-// import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
+} from "reactstrap";
+import { history } from "../../../history";
+import { Route } from "react-router-dom";
+import "../../../assets/scss/pages/app-ecommerce-shop.scss";
+import "../../../assets/scss/pages/users.scss";
+import axiosConfig from "../../../axiosConfig";
 
-import axiosConfig from '../../../axiosConfig'
-// import axios from "axios";
 class ViewUser extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       data: {},
-    }
+    };
   }
 
   componentDidMount() {
-    let { id } = this.props.match.params
+    let { id } = this.props.match.params;
     axiosConfig
       .get(`/user/viewoneuser/${id}`)
-
       .then((response) => {
-        //console.log(response.data);
-        console.log(response.data.data)
-        this.setState({ data: response.data.data })
+        console.log(response.data.data);
+        this.setState({ data: response.data.data });
       })
       .catch((error) => {
-        console.log(error.response)
-      })
+        console.log(error.response);
+      });
   }
 
   render() {
     return (
       <React.Fragment>
         <div>
-          {/* <Breadcrumbs
-            breadCrumbTitle="Customer"
-            breadCrumbParent="Home"
-            breadCrumbActive="View Customer "
-          /> */}
           <Row>
             <Col sm="12">
               <div>
@@ -70,14 +62,32 @@ class ViewUser extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push('/app/user/userList')}
-                >
-                  Back
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() => history.push("/app/user/userList")}
+                    >
+                      Back
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
+            {/* <Col>
+                  <Route
+                    render={({ history }) => (
+                      <Button
+                        className=" btn btn-success float-right"
+                        onClick={() =>
+                          history.push("/app/astrology/addAstrologer")
+                        }
+                      >
+                        Add Orders
+                      </Button>
+                    )}
+                  />
+                </Col> */}
             <CardBody className="pb-0">
               <Row className="ml-4">
                 <Col sm="9" md="12" lg="12">
@@ -129,8 +139,8 @@ class ViewUser extends React.Component {
           </Card>
         </div>
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default ViewUser
+export default ViewUser;

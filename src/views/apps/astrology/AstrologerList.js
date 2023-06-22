@@ -226,7 +226,7 @@ class AstrologerList extends React.Component {
                     color="green"
                     onClick={() =>
                       history.push(
-                        `/app/userride/viewUserRide/${params.data._id}`
+                        `/app/astrology/viewAstrologer/${params.data._id}`
                       )
                     }
                   />
