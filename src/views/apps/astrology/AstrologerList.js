@@ -45,6 +45,27 @@ class AstrologerList extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
+      {
+        headerName: "Image",
+        field: "astrologerimg",
+        filter: true,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              {params.data.img.map((i) => (
+                <img
+                  className=" rounded-circle  mr-3"
+                  src={i}
+                  alt="user avatar"
+                  height="40"
+                  width="40"
+                />
+              ))}
+            </div>
+          );
+        },
+      },
 
       {
         headerName: "Name",
@@ -263,16 +284,6 @@ class AstrologerList extends React.Component {
     ],
   };
   async componentDidMount() {
-    // let { id } = this.props.match.params;
-
-    // await axios
-    //   .get(`http://3.108.185.7:4000/user/view_onecust/${id}`)
-    //   .then((response) => {
-    //     let rowData = response.data.data;
-    //     console.log(rowData);
-    //     this.setState({ rowData });
-    //   });
-
     await axiosConfig.get("/admin/admin_astrop_list").then((response) => {
       let rowData = response.data.data;
       console.log(rowData);

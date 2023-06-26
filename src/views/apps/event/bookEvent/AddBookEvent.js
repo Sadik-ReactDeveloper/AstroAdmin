@@ -133,8 +133,9 @@ const AddBookEvent = () => {
   }, []);
 
   const submitHandler = (e) => {
+    debugger;
     e.preventDefault();
-    console.log("product", product);
+
     let start = time_slots.map((item) => item.start_Time);
     let end = time_slots.map((item) => item.End_Time);
 
@@ -166,14 +167,6 @@ const AddBookEvent = () => {
       console.log("images", poojaimg);
       data.append("poojaimg", poojaimg);
     }
-    // if (product.image != null) {
-    //   data.append("product.image", product[0].image);
-
-    // }
-    // for (let index = 0; index < product.length; index++) {
-    // const element = array[index];
-    // data.append(`product${[index]}.image`, product[index].image);
-    // }
 
     // console.log("item", product);
     // data.append("product.image", product.product);
@@ -186,7 +179,11 @@ const AddBookEvent = () => {
       .post(`/admin/admin_Addevent`, data)
       .then((response) => {
         console.log("SDK", response.data);
-        swal("Success!", "Submitted SuccessFull!", "success");
+        // this.props.history.push("/app/event/bookEvent/bookEventList");
+
+        swal("Success!", " Submitted SuccessFull!", "success");
+        this.setState({ pooja_type: "" });
+        this.setState({ product: "" });
       })
       .catch((error) => {
         console.log(error.response.data);

@@ -24,6 +24,7 @@ export default class EditAstrologer extends Component {
     this.state = {
       approvedstatus: "",
       status: "",
+      fullname: "",
     };
   }
   changeHandler1 = (e) => {
@@ -32,44 +33,44 @@ export default class EditAstrologer extends Component {
   changeHandler = (e) => {
     this.setState({ status: e.target.value });
   };
-  // componentDidMount() {
-  //   let { id } = this.props.match.params;
-  //   axiosConfig
-  //     .get(`/admin/viewoneabout/${id}`)
-  //     .then((response) => {
-  //       console.log(response);
-  //       this.setState({
-  //         desc: response.data.data.desc,
-
-  //         //   dealer: response.data.data.dealer,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //     });
-  // }
 
   changeHandler = (e) => {
+    console.log(e);
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  componentDidMount() {
+    let { id } = this.props.match.params;
+    console.log("first", id);
+    axiosConfig
+      .get(`/admin/getoneAstro/${id}`)
+      .then((response) => {
+        console.log("chhhh", response.data.data);
+        this.setState({ data: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
     axiosConfig
-    .post(`/user/status_change/${id}`, this.state)
-    .then((response) => {
-      console.log(response);
-      swal("Success!", "Submitted SuccessFull!", "success");
-      this.props.history.push(`/app/astrology/astrologerList`);
-    })
-    .catch((error) => {
-      console.log(error.response);
-    })
-    
+      .post(`/user/status_change/${id}`, this.state)
+      .then((response) => {
+        console.log(response);
+        swal("Success!", "Submitted SuccessFull!", "success");
+        this.props.history.push(`/app/astrology/astrologerList`);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+
     axiosConfig
       .post(`/admin/updteApprovedsts/${id}`, this.state)
       .then((response) => {
-        console.log(response);
+        console.log(">>>>", response);
+        //  fullname: this.state.fullname;
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push(`/app/astrology/astrologerList`);
       })
@@ -93,9 +94,7 @@ export default class EditAstrologer extends Component {
                 <BreadcrumbItem href="/" tag="a">
                   Home
                 </BreadcrumbItem>
-                {/* <BreadcrumbItem href="/app/material/materialList" tag="a">
-                    Material List
-                </BreadcrumbItem> */}
+
                 <BreadcrumbItem active>Edit Astrologer</BreadcrumbItem>
               </Breadcrumb>
             </div>
@@ -126,7 +125,7 @@ export default class EditAstrologer extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-              <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>
                   <div
                     className="form-label-group"
@@ -176,14 +175,13 @@ export default class EditAstrologer extends Component {
                   <Label>Name</Label>
                   <Input
                     type="text"
-                    // name="desc"
-                    // value={this.state.desc}
-                    // onChange={this.changeHandler}
-                    // rows="3"
+                    name="fullname"
+                    value={this.state?.data?.fullname}
+                    onChange={(e) => this.changeHandler(e)}
                     placeholder="Enter Astrologer Name"
                   />
-                </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                </Col> */}
+                {/*  <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Mobile</Label>
                   <Input
                     type="text"

@@ -27,6 +27,18 @@ const AddUser = lazy(() => import("./views/apps/user/AddUser"));
 const ViewUser = lazy(() => import("./views/apps/user/ViewUser"));
 const EditUser = lazy(() => import("./views/apps/user/EditUser"));
 
+const AstrologerList = lazy(() =>
+  import("./views/apps/astrology/AstrologerList")
+);
+const AddAstrologer = lazy(() =>
+  import("./views/apps/astrology/AddAstrologer")
+);
+const EditAstrologer = lazy(() =>
+  import("./views/apps/astrology/EditAstrologer")
+);
+const ViewAstrologer = lazy(() =>
+  import("./views/apps/astrology/ViewAstrologer")
+);
 // Report //
 const CallDetails = lazy(() => import("./views/apps/report/CallDetails"));
 const RechargeReport = lazy(() => import("./views/apps/report/RechargeReport"));
@@ -47,7 +59,7 @@ const YouTubeVideoList = lazy(() =>
 const AddYouTubeVideo = lazy(() =>
   import("./views/apps/youtube/AddYouTubeVideo")
 );
-// const LiveStreaming = lazy(() => import("./views/apps/"));
+
 // event
 const BannerPoojaList = lazy(() =>
   import("./views/apps/event/bennerPooja/BannerPoojaList")
@@ -255,22 +267,8 @@ const EditCategory = lazy(() =>
 const ViewCategory = lazy(() =>
   import("./views/apps/productmanager/category/ViewCategory")
 );
-// productManager close
-const AstrologerList = lazy(() =>
-  import("./views/apps/astrology/AstrologerList")
-);
-const AddAstrologer = lazy(() =>
-  import("./views/apps/astrology/AddAstrologer")
-);
-const EditAstrologer = lazy(() =>
-  import("./views/apps/astrology/EditAstrologer")
-);
-const ViewAstrologer = lazy(() =>
-  import("./views/apps/astrology/ViewAstrologer")
-);
 
 // coupons
-
 const CouponsList = lazy(() => import("./views/apps/coupons/CouponsList"));
 // const AddCoupons = lazy(() => import("./views/apps/coupons/AddCoupons"));
 // const EditCoupons = lazy(() => import("./views/apps/coupons/EditCoupon"));

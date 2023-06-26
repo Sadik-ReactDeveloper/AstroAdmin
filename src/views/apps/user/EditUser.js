@@ -73,19 +73,24 @@ export class EditUser extends Component {
       data.append("userimg", this.state.selectedFile, this.state.selectedName);
     }
 
-    for (var value of data.values()) {
-      console.log(value);
-    }
-    for (var key of data.keys()) {
-      console.log(key);
-    }
     let { id } = this.props.match.params;
+    // axiosConfig
+    //   .post(`/user/myprofile/${id}`, data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     swal("Success!", "Submitted SuccessFull!", "success");
+    //     this.props.history.push("/app/user/userList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     axiosConfig
-      .post(`/user/myprofile/${id}`, data)
+      .post(`/user/edit_myprofile/${id}`, this.state)
       .then((response) => {
         console.log(response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/user/userList");
+        // this.props.history.push("/app/user/userList");
       })
       .catch((error) => {
         console.log(error);
