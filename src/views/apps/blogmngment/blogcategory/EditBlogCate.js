@@ -104,12 +104,7 @@ export default class EditBlogCate extends Component {
         data.append("img", file, file.name);
       }
     }
-    for (var value of data.values()) {
-      console.log(value);
-    }
-    for (var key of data.keys()) {
-      console.log(key);
-    }
+
     let { id } = this.props.match.params;
     axiosConfig
       .post(`admin/edit_blog_cat/${id}`, data)
@@ -186,6 +181,7 @@ export default class EditBlogCate extends Component {
 
                   <CustomInput
                     type="file"
+                    required
                     // multiple
                     onChange={this.onChangeHandler}
                   />

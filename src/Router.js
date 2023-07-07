@@ -171,7 +171,9 @@ const PackageOfferViewOne = lazy(() =>
 const UserRecharge = lazy(() =>
   import("./views/apps/packagemanager/UserRecharge")
 );
-
+const AdminCommission = lazy(() =>
+  import("./views/apps/packagemanager/AdminCommission")
+);
 const Commission = lazy(() => import("./views/apps/packagemanager/Commission"));
 const CommissionAdd = lazy(() =>
   import("./views/apps/packagemanager/CommissionAdd")
@@ -797,6 +799,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/packagemanager/userrecharge"
               component={UserRecharge}
+            />
+            <AppRoute
+              path="/app/packagemanager/adminCommission"
+              component={AdminCommission}
             />
             <AppRoute
               path="/app/packagemanager/commission"

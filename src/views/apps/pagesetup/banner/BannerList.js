@@ -114,8 +114,11 @@ class BannerList extends React.Component {
             <div className="badge badge-pill badge-success">
               {params.data.status}
             </div>
-          ) : params.value === "Deactive" ? (
-            <div className="badge badge-pill badge-warning">
+          ) : params.value === "Inactive" ? (
+            <div
+              className="badge badge-pill "
+              style={{ backgroundColor: "#ffcc01" }}
+            >
               {params.data.status}
             </div>
           ) : null;

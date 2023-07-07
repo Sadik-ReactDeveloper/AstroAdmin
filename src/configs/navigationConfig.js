@@ -324,6 +324,14 @@ const navigationConfig = [
     navLink: "/app/packagemanager/commission",
   },
   {
+    id: "mycommission",
+    title: "My Commission",
+    type: "item",
+    icon: <Icon.Circle size={20} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/packagemanager/adminCommission",
+  },
+  {
     id: "payouts",
     title: "Payouts ",
     type: "item",

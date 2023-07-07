@@ -198,7 +198,10 @@ class BookEventList extends React.Component {
               <span>{"Available"}</span>
             </div>
           ) : (
-            <div className="badge badge-pill badge-warning">
+            <div
+              className="badge badge-pill "
+              style={{ backgroundColor: "#ffcc01" }}
+            >
               <span>{"Unavailable"}</span>
             </div>
           );

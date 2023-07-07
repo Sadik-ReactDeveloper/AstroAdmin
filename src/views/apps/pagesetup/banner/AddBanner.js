@@ -49,9 +49,9 @@ export default class AddBanner extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-
     const data = new FormData();
     data.append("banner_title", this.state.banner_title);
+    data.append("root", this.state.root);
     data.append("status", this.state.status);
 
     for (const file of this.state.selectedFile) {
@@ -59,25 +59,16 @@ export default class AddBanner extends Component {
         data.append("banner_img", file, file.name);
       }
     }
-    for (var value of data.values()) {
-      console.log(value);
-    }
-    for (var key of data.keys()) {
-      console.log(key);
-    }
 
     axiosConfig
       .post("admin/addbanner", data)
-      // headers: { )
-      //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
-      // },
-
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push("/app/pagesetup/banner/bannerList");
       })
       .catch((error) => {
+        swal("Error", "Error getting ");
         console.log(error);
       });
   };
@@ -135,6 +126,39 @@ export default class AddBanner extends Component {
                     value={this.state.banner_title}
                     onChange={this.changeHandler}
                   ></Input>
+                </Col>
+                <Col>
+                  <Label>Select Banner</Label>
+                  <select
+                    className="form-control"
+                    required
+                    name="root"
+                    value={this.state.root}
+                    onChange={this.changeHandler}
+                  >
+                    <option value="">--Select--</option>
+                    <option value="kundaliform">Match Making</option>
+                    <option value="allastrologerlist">
+                      Talk to Astrologer
+                    </option>
+                    <option value="liveAstrologer">LiveStreaming </option>
+                    <option value="manglikdosh">Manglikdosh</option>
+                    <option value="pitraDosh">PitraDosh</option>
+                    <option value="kalsharpDosh">kalsharpDosh</option>
+                    <option value="heroscopestwo">Daily Horoscope</option>
+                    <option value="heroscopestwo1">Weekly Horoscope</option>
+                    <option value="heroscopestwo2">Monthly Horoscope</option>
+                    <option value="astromallList">AstromallList</option>
+                    <option value="bookEvent">Book Pooja</option>
+                    <option value="basicPanchang">BasicPanchang</option>
+                    <option value="todayPanchang">TodayPanchang</option>
+                    <option value="aboutdetail">About Us</option>
+                    <option value="contact">Contact Us</option>
+                    <option value="TermsOfUse">TermsOfUse</option>
+                    <option value="privacyPolicy">PrivacyPolicy</option>
+                    <option value="blog-no-sidebar">Blogs</option>
+                    <option value="Faq">Faq</option>
+                  </select>
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Image</Label>
