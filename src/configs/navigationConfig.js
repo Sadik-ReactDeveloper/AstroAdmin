@@ -18,7 +18,7 @@ const navigationConfig = [
 
   {
     id: "user",
-    title: "User Management",
+    title: "Profile Management",
     type: "collapse",
     icon: <Icon.Users size={20} />,
     children: [
@@ -32,7 +32,7 @@ const navigationConfig = [
       },
       {
         id: "astrologerList",
-        title: "Astrologer",
+        title: "Astrologer List",
         type: "item",
         icon: <Icon.User size={12} />,
         permissions: ["admin", "editor"],
@@ -62,9 +62,16 @@ const navigationConfig = [
     id: "rashimanagement",
     title: "Book Puja",
     type: "collapse",
-    // icon: <Icon.FileText size={12} />,
     icon: <Icon.BarChart2 size={20} />,
     children: [
+      {
+        id: "bookedpooja",
+        title: "Booked Pooja ",
+        type: "item",
+        icon: <Icon.Box size={20} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/event/bennerPooja/bannerPoojaList",
+      },
       {
         id: "bannerPoojaList",
         title: "Banner Pooja List",
@@ -73,6 +80,7 @@ const navigationConfig = [
         permissions: ["admin", "editor"],
         navLink: "/app/event/bennerPooja/bannerPoojaList",
       },
+
       {
         id: "eventList",
         title: "Pooja type List",
@@ -138,28 +146,28 @@ const navigationConfig = [
     children: [
       {
         id: "callComplete",
-        title: "Complete Call",
+        title: "Call History",
         type: "item",
         icon: <Icon.PhoneIncoming size={12} color="green" />,
         permissions: ["admin", "editor"],
         navLink: "/app/callmanagement/completecall",
       },
-      {
-        id: "callreject",
-        title: "Reject Call",
-        type: "item",
-        icon: <Icon.PhoneMissed size={12} color="red" />,
-        permissions: ["admin", "editor"],
-        navLink: "/app/callmanagement/callreject",
-      },
-      {
-        id: "calltansaction",
-        title: "Call Transac. History",
-        type: "item",
-        icon: <Icon.PhoneMissed size={12} color="red" />,
-        permissions: ["admin", "editor"],
-        navLink: "",
-      },
+      // {
+      //   id: "callreject",
+      //   title: "Reject Call",
+      //   type: "item",
+      //   icon: <Icon.PhoneMissed size={12} color="red" />,
+      //   permissions: ["admin", "editor"],
+      //   navLink: "/app/callmanagement/callreject",
+      // },
+      // {
+      //   id: "calltansaction",
+      //   title: "Call Transac. History",
+      //   type: "item",
+      //   icon: <Icon.PhoneMissed size={12} color="red" />,
+      //   permissions: ["admin", "editor"],
+      //   navLink: "",
+      // },
     ],
   },
 
@@ -170,6 +178,14 @@ const navigationConfig = [
     icon: <Icon.List size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/chat/chatList",
+  },
+  {
+    id: "chathistory",
+    title: "Chat/Video Call History",
+    type: "item",
+    icon: <Icon.List size={20} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/callmanagement/chatreport",
   },
 
   {
@@ -354,14 +370,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/media/socialmedia",
   },
-  {
-    id: "otherpages",
-    title: "Other Pages",
-    type: "item",
-    icon: <Icon.Circle size={20} />,
-    permissions: ["admin", "editor"],
-    navLink: "/app/otherpages/otherpage",
-  },
+
   {
     id: "transaction",
     title: "All Transaction",
@@ -379,7 +388,14 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/reviewrating/ratinglist",
   },
-
+  {
+    id: "otherpages",
+    title: "Other Pages",
+    type: "item",
+    icon: <Icon.Circle size={20} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/otherpages/otherpage",
+  },
   // {
   //   type: "groupHeader",
   //   groupTitle: "Wallet Management",

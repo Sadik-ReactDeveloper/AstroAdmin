@@ -215,7 +215,7 @@ class AllOrderList extends React.Component {
                     color="blue"
                     onClick={() =>
                       history.push(
-                        `/app/astrology/editAstrologer/${params.data._id}`
+                        `/app/ordermanage/editorder/${params.data._id}`
                       )
                     }
                   />

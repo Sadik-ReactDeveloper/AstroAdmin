@@ -103,12 +103,7 @@ export default class AddBlog extends Component {
         data.append("blogImg", file, file.name);
       }
     }
-    // for (var value of data.values()) {
-    //   console.log("23value", value);
-    // }
-    // for (var key of data.keys()) {
-    //   console.log("key", key);
-    // }
+
     axiosConfig
       .post(`admin/addBlog`, data)
 
@@ -152,7 +147,7 @@ export default class AddBlog extends Component {
               <Route
                 render={({ history }) => (
                   <Button
-                    className=" btn btn-success float-right"
+                    className=" btn btn-danger float-right"
                     onClick={() =>
                       history.push("/app/blogmngment/blog/blogList")
                     }
@@ -172,7 +167,7 @@ export default class AddBlog extends Component {
                     required
                     type="text"
                     name="blog_title"
-                    placeholder=""
+                    placeholder="Enter Title"
                     value={this.state.blog_title}
                     onChange={this.changeHandler}
                   ></Input>

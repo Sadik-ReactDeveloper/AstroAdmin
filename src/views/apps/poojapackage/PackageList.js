@@ -131,7 +131,7 @@ class PackageList extends React.Component {
                   />
                 )}
               /> */}
-              <Route
+              {/* <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
@@ -144,7 +144,7 @@ class PackageList extends React.Component {
                     }
                   />
                 )}
-              />
+              /> */}
               <Trash2
                 className="mr-50"
                 size="25px"

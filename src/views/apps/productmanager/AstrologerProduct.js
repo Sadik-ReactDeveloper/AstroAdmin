@@ -161,8 +161,8 @@ class AstrologerProduct extends React.Component {
                     }
                   />
                 )}
-              />
-              <Route
+              /> */}
+              {/* <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"

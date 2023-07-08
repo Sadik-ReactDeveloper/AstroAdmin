@@ -86,6 +86,7 @@ const ViewBookEvent = lazy(() =>
 const AllOrderList = lazy(() =>
   import("./views/apps/ordermanage/AllOrderLList")
 );
+const EditOrder = lazy(() => import("./views/apps/ordermanage/EditOrder"));
 
 //Wallet//
 const WalletTransaction = lazy(() =>
@@ -252,6 +253,9 @@ const ViewHoroscopes = lazy(() =>
 
 const UserChatList = lazy(() => import("./views/apps/chat/UserChatList"));
 const ChatList = lazy(() => import("./views/apps/chat/ChatList"));
+const ChatReport = lazy(() =>
+  import("./views/apps/callmanagement/ChatReports")
+);
 
 const AstrologerProduct = lazy(() =>
   import("./views/apps/productmanager/AstrologerProduct")
@@ -683,6 +687,10 @@ class AppRouter extends React.Component {
             />
             {/* Start Horoscopes*/}
             <AppRoute path="/app/chat/chatList" component={ChatList} />
+            <AppRoute
+              path="/app/callmanagement/chatreport"
+              component={ChatReport}
+            />
             <AppRoute
               path="/app/horoscopecategory/horoscopeCategoryList"
               component={HoroscopeCategoryList}
@@ -1118,6 +1126,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/ordermanage/allorderlist"
               component={AllOrderList}
+            />
+            <AppRoute
+              path="/app/ordermanage/editorder/:id"
+              component={EditOrder}
             />
             {/* wallet */}
             <AppRoute

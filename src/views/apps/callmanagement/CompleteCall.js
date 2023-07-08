@@ -12,6 +12,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
@@ -37,24 +38,37 @@ class CompleteCall extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 100,
+        width: 90,
         filter: true,
         // checkboxSelection: true,
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
+      },
+      {
+        headerName: "Status",
+        field: "Status",
+        filter: true,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>
+                <b>{params.data?.Status}</b>
+              </span>
+            </div>
+          );
+        },
       },
 
       {
         headerName: "Customer Name",
         field: "customername",
         filter: true,
-        width: 200,
+        width: 180,
         cellRendererFramework: (params) => {
           return (
             <div>
-              <span>
-                {params.data.firstname} {params.data.lastname}
-              </span>
+              <span>{params.data?.userid?.fullname}</span>
             </div>
           );
         },
@@ -64,63 +78,103 @@ class CompleteCall extends React.Component {
         headerName: "Astrologer Name",
         field: "astrologername	",
         filter: true,
-        width: 200,
+        width: 120,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.email}</span>
+              <span>{params.data?.astroid?.fullname}</span>
             </div>
           );
         },
       },
       {
         headerName: "Date",
-        field: "date",
+        field: "time",
         filter: true,
-        width: 200,
+        width: 170,
         cellRendererFramework: (params) => {
           return (
             <div>
-              <span>{params.data.mobile}</span>
+              <span>{params.data?.DateCreated}</span>
+            </div>
+          );
+        },
+      },
+
+      // {
+      //   headerName: "From No",
+      //   field: "from",
+      //   filter: true,
+      //   width: 140,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div>
+      //         <span>{params.data?.From}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
+      // {
+      //   headerName: "To Number",
+      //   field: "To",
+      //   filter: true,
+      //   width: 140,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div>
+      //         <span>{params.data?.To}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
+      {
+        headerName: "Duration",
+        field: "To",
+        filter: true,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>{params.data?.Duration} Sec</span>
             </div>
           );
         },
       },
       {
-        headerName: "Time",
-        field: "tiem",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.mobile}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Recording",
-        field: "recording",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.mobile}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Total Call Amount",
+        headerName: "Total Earning",
         field: "callamount",
         filter: true,
-        width: 200,
+        width: 160,
         cellRendererFramework: (params) => {
           return (
             <div>
-              <span>{params.data.mobile}</span>
+              <span>{parseInt(params.data?.userdeductedAmt)}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Astro Earning",
+        field: "callamount",
+        filter: true,
+        width: 160,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>{params.data?.astroCredited.toFixed(2)}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Admin Earning",
+        field: "callamount",
+        filter: true,
+        width: 160,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>{params.data?.adminCredited.toFixed(2)}</span>
             </div>
           );
         },
@@ -133,7 +187,7 @@ class CompleteCall extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Route
+              {/* <Route
                 render={({ history }) => (
                   <Eye
                     className="mr-50"
@@ -146,8 +200,8 @@ class CompleteCall extends React.Component {
                     }
                   />
                 )}
-              />
-              <Route
+              /> */}
+              {/* <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
@@ -156,14 +210,14 @@ class CompleteCall extends React.Component {
                     onClick={() => history.push("/app/userride/editUserRide")}
                   />
                 )}
-              />
+              /> */}
               <Trash2
                 className="mr-50"
                 size="25px"
                 color="red"
                 onClick={() => {
                   let selectedData = this.gridApi.getSelectedRows();
-                  this.runthisfunction(params.data._id);
+                  this.runthisfunction(params.data?._id);
                   this.gridApi.updateRowData({ remove: selectedData });
                 }}
               />
@@ -176,26 +230,16 @@ class CompleteCall extends React.Component {
   async componentDidMount() {
     let { id } = this.props.match.params;
 
-    await axios
-      .get(`http://3.108.185.7:4000/user/view_onecust/${id}`)
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
-
-    await axios
-      .get("http://3.108.185.7:4000/admin/allcustomer")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get(`/admin/adminCallHistory`).then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
 
   async runthisfunction(id) {
     console.log(id);
-    await axios.get(`http://3.108.185.7:4000/admin/delcustomer/${id}`).then(
+    await axiosConfig.get(`/user/dlCallHistory/${id}`).then(
       (response) => {
         console.log(response);
       },
@@ -244,22 +288,8 @@ class CompleteCall extends React.Component {
                 <Row className="m-2">
                   <Col>
                     <h1 sm="6" className="float-left">
-                      Complete Call
+                      Call Status
                     </h1>
-                  </Col>
-                  <Col>
-                    <Route
-                      render={({ history }) => (
-                        <Button
-                          className=" btn btn-success float-right"
-                          onClick={() =>
-                            history.push("/app/astrology/addAstrologer")
-                          }
-                        >
-                          Add
-                        </Button>
-                      )}
-                    />
                   </Col>
                 </Row>
                 <CardBody>

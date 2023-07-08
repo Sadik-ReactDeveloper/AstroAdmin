@@ -16,16 +16,18 @@ import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
-//import classnames from "classnames";
+
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
+import swal from "sweetalert";
 
 class AstrologerList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
+    Commission: null,
     currenPageSize: "",
     getPageSize: "",
     defaultColDef: {
@@ -41,30 +43,6 @@ class AstrologerList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
-      },
-      {
-        headerName: "Image",
-        field: "astrologerimg",
-        filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {params.data.img.map((i) => (
-                <img
-                  className=" rounded-circle  mr-3"
-                  src={i}
-                  alt="user avatar"
-                  height="40"
-                  width="40"
-                />
-              ))}
-            </div>
-          );
-        },
       },
 
       {
@@ -107,30 +85,32 @@ class AstrologerList extends React.Component {
           );
         },
       },
-      // {
-      //   headerName: "Gender",
-      //   field: "gender",
-      //   filter: true,
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return <div>
-      //       <span>{params?.data?.gender}</span>
-      //     </div>;
-      //   },
-      // },
-      // {
-      //   headerName: "DOB",
-      //   field: "dob",
-      //   filter: true,
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div>
-      //         <span>{params.data.dob}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        headerName: "Gender",
+        field: "gender",
+        filter: true,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>{params.data.gender}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "DOB",
+        field: "dob",
+        filter: true,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div>
+              <span>{params.data.dob}</span>
+            </div>
+          );
+        },
+      },
       {
         headerName: "Primary Skills",
         field: "primary_skills",
@@ -235,7 +215,7 @@ class AstrologerList extends React.Component {
       {
         headerName: "Action",
         field: "sortorder",
-        width: 150,
+        width: 100,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
@@ -247,7 +227,7 @@ class AstrologerList extends React.Component {
                     color="green"
                     onClick={() =>
                       history.push(
-                        `/app/astrology/viewAstrologer/${params.data._id}`
+                        `/app/userride/viewUserRide/${params.data._id}`
                       )
                     }
                   />
@@ -286,8 +266,11 @@ class AstrologerList extends React.Component {
   async componentDidMount() {
     await axiosConfig.get("/admin/admin_astrop_list").then((response) => {
       let rowData = response.data.data;
-      console.log(rowData);
       this.setState({ rowData });
+    });
+    await axiosConfig.get("/admin/viewoneCommision").then((response) => {
+      let rowData = response?.data?.data?.admincomision;
+      this.setState({ Commission: rowData });
     });
   }
 
@@ -323,29 +306,47 @@ class AstrologerList extends React.Component {
       });
     }
   };
+  handleAddCommistion = (e) => {
+    if (this.state.Commission) {
+      axiosConfig
+        .post(`/admin/updateComision/64967ef62cf27fc5dd12416d`, {
+          admincomision: this.state.Commission,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res?.data?.message === "success") {
+            swal("Commission Updated Succesfully");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+  blockInvalidChar = (e) =>
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
   render() {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
-      console.log(rowData),
-      (
-        <div>
-          <Breadcrumbs
-            breadCrumbTitle="Astrologer"
-            breadCrumbParent="Home"
-            breadCrumbActive=" Astrologer "
-          />
+      <div>
+        <Breadcrumbs
+          breadCrumbTitle="Astrologer"
+          breadCrumbParent="Home"
+          breadCrumbActive=" Astrologer "
+        />
 
-          <Row className="app-user-list">
-            <Col sm="12"></Col>
-            <Col sm="12">
-              <Card>
-                <Row className="m-2">
-                  <Col>
-                    <h1 sm="6" className="float-left">
-                      Astrologer List
-                    </h1>
-                  </Col>
-                  {/* <Col>
+        <Row className="app-user-list">
+          <Col sm="12"></Col>
+          <Col sm="12">
+            <Card>
+              <Row className="m-2">
+                <Col lg="3">
+                  <h1 sm="2" className="float-left">
+                    Astrologer List
+                  </h1>
+                </Col>
+
+                {/* <Col>
                     <Route
                       render={({ history }) => (
                         <Button
@@ -359,104 +360,130 @@ class AstrologerList extends React.Component {
                       )}
                     />
                   </Col> */}
+              </Row>
+              <div className="container">
+                <Row>
+                  <Col lg="3">
+                    <h4 className="float-left">Set Admin Commission</h4>
+                    <h6 className="float-left">
+                      Present Commission :
+                      {this.state.Commission && this.state.Commission} %
+                    </h6>
+                  </Col>
+                  <Col lg="4">
+                    <input
+                      onKeyDown={this.blockInvalidChar}
+                      type="number"
+                      value={this.state.Commission}
+                      onChange={(e) =>
+                        this.setState({ Commission: e.target.value })
+                      }
+                      className="form-control"
+                    />
+                  </Col>
+                  <Col lg="3">
+                    <Button onClick={this.handleAddCommistion} color="primary">
+                      Submit
+                    </Button>
+                  </Col>
                 </Row>
-                <CardBody>
-                  {this.state.rowData === null ? null : (
-                    <div className="ag-theme-material w-100 my-2 ag-grid-table">
-                      <div className="d-flex flex-wrap justify-content-between align-items-center">
-                        <div className="mb-1">
-                          <UncontrolledDropdown className="p-1 ag-dropdown">
-                            <DropdownToggle tag="div">
-                              {this.gridApi
-                                ? this.state.currenPageSize
-                                : "" * this.state.getPageSize -
-                                  (this.state.getPageSize - 1)}{" "}
-                              -{" "}
-                              {this.state.rowData.length -
-                                this.state.currenPageSize *
-                                  this.state.getPageSize >
-                              0
-                                ? this.state.currenPageSize *
-                                  this.state.getPageSize
-                                : this.state.rowData.length}{" "}
-                              of {this.state.rowData.length}
-                              <ChevronDown className="ml-50" size={15} />
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                              <DropdownItem
-                                tag="div"
-                                onClick={() => this.filterSize(20)}
-                              >
-                                20
-                              </DropdownItem>
-                              <DropdownItem
-                                tag="div"
-                                onClick={() => this.filterSize(50)}
-                              >
-                                50
-                              </DropdownItem>
-                              <DropdownItem
-                                tag="div"
-                                onClick={() => this.filterSize(100)}
-                              >
-                                100
-                              </DropdownItem>
-                              <DropdownItem
-                                tag="div"
-                                onClick={() => this.filterSize(134)}
-                              >
-                                134
-                              </DropdownItem>
-                            </DropdownMenu>
-                          </UncontrolledDropdown>
-                        </div>
-                        <div className="d-flex flex-wrap justify-content-between mb-1">
-                          <div className="table-input mr-1">
-                            <Input
-                              placeholder="search..."
-                              value={this.state.value}
-                              onChange={(e) =>
-                                this.updateSearchQuery(e.target.value)
-                              }
-                            />
-                          </div>
-                          <div className="export-btn">
-                            <Button.Ripple
-                              color="primary"
-                              onClick={() => this.gridApi.exportDataAsCsv()}
+              </div>
+              <CardBody>
+                {this.state.rowData === null ? null : (
+                  <div className="ag-theme-material w-100 my-2 ag-grid-table">
+                    <div className="d-flex flex-wrap justify-content-between align-items-center">
+                      <div className="mb-1">
+                        <UncontrolledDropdown className="p-1 ag-dropdown">
+                          <DropdownToggle tag="div">
+                            {this.gridApi
+                              ? this.state.currenPageSize
+                              : "" * this.state.getPageSize -
+                                (this.state.getPageSize - 1)}{" "}
+                            -{" "}
+                            {this.state.rowData.length -
+                              this.state.currenPageSize *
+                                this.state.getPageSize >
+                            0
+                              ? this.state.currenPageSize *
+                                this.state.getPageSize
+                              : this.state.rowData.length}{" "}
+                            of {this.state.rowData.length}
+                            <ChevronDown className="ml-50" size={15} />
+                          </DropdownToggle>
+                          <DropdownMenu right>
+                            <DropdownItem
+                              tag="div"
+                              onClick={() => this.filterSize(20)}
                             >
-                              Export as CSV
-                            </Button.Ripple>
-                          </div>
+                              20
+                            </DropdownItem>
+                            <DropdownItem
+                              tag="div"
+                              onClick={() => this.filterSize(50)}
+                            >
+                              50
+                            </DropdownItem>
+                            <DropdownItem
+                              tag="div"
+                              onClick={() => this.filterSize(100)}
+                            >
+                              100
+                            </DropdownItem>
+                            <DropdownItem
+                              tag="div"
+                              onClick={() => this.filterSize(134)}
+                            >
+                              134
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </div>
+                      <div className="d-flex flex-wrap justify-content-between mb-1">
+                        <div className="table-input mr-1">
+                          <Input
+                            placeholder="search..."
+                            onChange={(e) =>
+                              this.updateSearchQuery(e.target.value)
+                            }
+                            value={this.state.value}
+                          />
+                        </div>
+                        <div className="export-btn">
+                          <Button.Ripple
+                            color="primary"
+                            onClick={() => this.gridApi.exportDataAsCsv()}
+                          >
+                            Export as CSV
+                          </Button.Ripple>
                         </div>
                       </div>
-                      <ContextLayout.Consumer>
-                        {(context) => (
-                          <AgGridReact
-                            gridOptions={{}}
-                            rowSelection="multiple"
-                            defaultColDef={defaultColDef}
-                            columnDefs={columnDefs}
-                            rowData={rowData}
-                            onGridReady={this.onGridReady}
-                            colResizeDefault={"shift"}
-                            animateRows={true}
-                            floatingFilter={false}
-                            pagination={true}
-                            paginationPageSize={this.state.paginationPageSize}
-                            pivotPanelShow="always"
-                            enableRtl={context.state.direction === "rtl"}
-                          />
-                        )}
-                      </ContextLayout.Consumer>
                     </div>
-                  )}
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      )
+                    <ContextLayout.Consumer>
+                      {(context) => (
+                        <AgGridReact
+                          gridOptions={{}}
+                          rowSelection="multiple"
+                          defaultColDef={defaultColDef}
+                          columnDefs={columnDefs}
+                          rowData={rowData}
+                          onGridReady={this.onGridReady}
+                          colResizeDefault={"shift"}
+                          animateRows={true}
+                          floatingFilter={false}
+                          pagination={true}
+                          paginationPageSize={this.state.paginationPageSize}
+                          pivotPanelShow="always"
+                          enableRtl={context.state.direction === "rtl"}
+                        />
+                      )}
+                    </ContextLayout.Consumer>
+                  </div>
+                )}
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

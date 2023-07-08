@@ -101,7 +101,7 @@ export default class AddPackage extends Component {
               <Route
                 render={({ history }) => (
                   <Button
-                    className=" btn btn-success float-right"
+                    className=" btn btn-danger float-right"
                     onClick={() =>
                       history.push("/app/poojapackage/packageList")
                     }
