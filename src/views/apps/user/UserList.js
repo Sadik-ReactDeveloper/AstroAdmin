@@ -40,9 +40,6 @@ class UserList extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
         headerName: "Image",
@@ -53,8 +50,9 @@ class UserList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {params.data.userimg.map((i) => (
+              {params.data.userimg.map((i, ind) => (
                 <img
+                  key={ind}
                   className=" rounded-circle  mr-3"
                   src={i}
                   alt="user avatar"

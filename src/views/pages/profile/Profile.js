@@ -46,7 +46,6 @@ class Profile extends React.Component {
     axiosConfig
       .get(`/admin/viewoneadmin/${adminId}`)
       .then((response) => {
-        //console.log(response.data);
         console.log("???????", response.data);
         this.setState({
           data: response.data.data,
