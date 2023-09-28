@@ -65,10 +65,14 @@ class EventList extends React.Component {
         filter: true,
         width: 300,
         cellRendererFramework: (params) => {
+          let datetime = new Date(params.data.createdAt);
+          const date = datetime.toISOString().slice(0, 10);
+          const time = datetime.toTimeString().slice(0, 8);
+
           return (
             <div>
-              {" "}
-              <span>{params.data.createdAt}</span>{" "}
+              <span>{date}</span>
+              <span className="pl-2">{time}</span>
             </div>
           );
         },

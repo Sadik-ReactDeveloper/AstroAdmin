@@ -95,7 +95,7 @@ class AllPlan extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Route
+              {/* <Route
                 render={({ history }) => (
                   <Eye
                     className="mr-50"
@@ -108,7 +108,7 @@ class AllPlan extends React.Component {
                     }
                   />
                 )}
-              />
+              /> */}
               <Route
                 render={({ history }) => (
                   <Edit
@@ -199,9 +199,7 @@ class AllPlan extends React.Component {
               <Card>
                 <Row className="m-2">
                   <Col>
-                    <h1 sm="6" className="float-left">
-                      All Plan
-                    </h1>
+                    <h1 className="float-left">All Plan</h1>
                   </Col>
                   <Col>
                     <Route
@@ -212,7 +210,7 @@ class AllPlan extends React.Component {
                             history.push("/app/packagemanager/addPlan")
                           }
                         >
-                          Add
+                          Add Plan
                         </Button>
                       )}
                     />

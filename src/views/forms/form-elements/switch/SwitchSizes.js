@@ -1,5 +1,5 @@
-import React from "react"
-import { Card, CardHeader, CardTitle, CardBody, CustomInput } from "reactstrap"
+import React from "react";
+import { Card, CardHeader, CardTitle, CardBody, CustomInput } from "reactstrap";
 
 class SwitchSizes extends React.Component {
   render() {
@@ -32,7 +32,7 @@ class SwitchSizes extends React.Component {
           </CustomInput>
         </CardBody>
       </Card>
-    )
+    );
   }
 }
-export default SwitchSizes
+export default SwitchSizes;

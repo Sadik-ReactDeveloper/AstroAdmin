@@ -24,7 +24,6 @@ export default class EditAstrologer extends Component {
     this.state = {
       approvedstatus: "",
       status: "",
-      fullname: "",
     };
   }
   changeHandler1 = (e) => {
@@ -35,17 +34,14 @@ export default class EditAstrologer extends Component {
   };
 
   changeHandler = (e) => {
-    console.log(e);
     this.setState({ [e.target.name]: e.target.value });
   };
 
   componentDidMount() {
     let { id } = this.props.match.params;
-    console.log("first", id);
     axiosConfig
       .get(`/admin/getoneAstro/${id}`)
       .then((response) => {
-        console.log("chhhh", response.data.data);
         this.setState({ data: response.data.data });
       })
       .catch((error) => {
@@ -57,8 +53,7 @@ export default class EditAstrologer extends Component {
     let { id } = this.props.match.params;
     axiosConfig
       .post(`/user/status_change/${id}`, this.state)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push(`/app/astrology/astrologerList`);
       })
@@ -69,8 +64,7 @@ export default class EditAstrologer extends Component {
     axiosConfig
       .post(`/admin/updteApprovedsts/${id}`, this.state)
       .then((response) => {
-        console.log(">>>>", response);
-        //  fullname: this.state.fullname;
+        console.log(">>>>", response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push(`/app/astrology/astrologerList`);
       })
@@ -103,9 +97,7 @@ export default class EditAstrologer extends Component {
         <Card>
           <Row className="m-2">
             <Col>
-              <h1 col-sm-6 className="float-left">
-                Edit Astrologer
-              </h1>
+              <h1 className="float-left">Edit Astrologer</h1>
             </Col>
             <Col>
               <Route
@@ -126,7 +118,7 @@ export default class EditAstrologer extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
+                  <Label className="mb-1">Live Status</Label>
                   <div
                     className="form-label-group"
                     onChange={(e) => this.changeHandler(e)}

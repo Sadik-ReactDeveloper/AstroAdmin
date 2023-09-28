@@ -64,14 +64,14 @@ const navigationConfig = [
     type: "collapse",
     icon: <Icon.BarChart2 size={20} />,
     children: [
-      {
-        id: "bookedpooja",
-        title: "Booked Pooja ",
-        type: "item",
-        icon: <Icon.Box size={20} />,
-        permissions: ["admin", "editor"],
-        navLink: "/app/event/bennerPooja/bannerPoojaList",
-      },
+      // {
+      //   id: "bookedpooja",
+      //   title: "Booked Pooja ",
+      //   type: "item",
+      //   icon: <Icon.Box size={20} />,
+      //   permissions: ["admin", "editor"],
+      //   navLink: "/app/event/bennerPooja/bannerPoojaList",
+      // },
       {
         id: "bannerPoojaList",
         title: "Banner Pooja List",

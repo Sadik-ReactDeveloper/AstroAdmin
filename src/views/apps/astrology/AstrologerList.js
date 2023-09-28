@@ -10,6 +10,7 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
+  CustomInput,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
 
@@ -26,6 +27,7 @@ import swal from "sweetalert";
 class AstrologerList extends React.Component {
   state = {
     rowData: [],
+    approvedstatus: "",
     paginationPageSize: 20,
     Commission: null,
     currenPageSize: "",
@@ -45,6 +47,25 @@ class AstrologerList extends React.Component {
         filter: true,
       },
 
+      // {
+      //   headerName: "Approvel",
+      //   field: "Approve",
+      //   filter: true,
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div>
+      //         <CustomInput
+      //           type="switch"
+      //           id={params.data._id}
+      //           name="default"
+      //           inline
+      //           onChange={() => this.handleApprovelStatus(params.data._id)}
+      //         />
+      //       </div>
+      //     );
+      //   },
+      // },
       {
         headerName: "Name",
         field: "fullname",
@@ -76,7 +97,7 @@ class AstrologerList extends React.Component {
         headerName: "Mobile No.",
         field: "mobile",
         filter: true,
-        width: 120,
+        width: 130,
         cellRendererFramework: (params) => {
           return (
             <div>
@@ -215,7 +236,8 @@ class AstrologerList extends React.Component {
       {
         headerName: "Action",
         field: "sortorder",
-        width: 100,
+        pinned: window.innerWidth > 992 ? "right" : false,
+        width: 120,
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
@@ -263,6 +285,22 @@ class AstrologerList extends React.Component {
       },
     ],
   };
+  // handleApprovelStatus = (e, i) => {
+  //   console.log("call", e);
+  //   if (e) {
+  //     this.setState({ approvedstatus: "true" });
+  //   }
+
+  //   axiosConfig
+  //     .post(`/admin/updteApprovedsts/${e}`, this.state.approvedstatus)
+  //     .then((response) => {
+  //       console.log(">>>>response", response.data);
+  //       swal("Success!", "Submitted SuccessFull!", "success");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
+  // };
   async componentDidMount() {
     await axiosConfig.get("/admin/admin_astrop_list").then((response) => {
       let rowData = response.data.data;

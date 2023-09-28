@@ -14,6 +14,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
+import { Route } from "react-router-dom";
 import axiosConfig from "../../../axiosConfig";
 import { history } from "../../../history";
 import swal from "sweetalert";
@@ -70,30 +71,36 @@ export default class AddSize extends Component {
         <Card>
           <Row className="m-2">
             <Col>
-              <h1 col-sm-6 className="float-left">
-                Add Plan
-              </h1>
+              <h1 className="float-left">Add Plan</h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/packagemanager/allPlan")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/packagemanager/allPlan")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>title</Label>
+                  <Label>Title(Title Will Be Number )</Label>
                   <Input
                     required
-                    type="text"
+                    type="number"
                     name="title"
-                    placeholder=""
+                    placeholder="Title"
                     value={this.state.title}
+                    onKeyDown={(e) => {
+                      ["e", "E", "+", "-"].includes(e.key) &&
+                        e.preventDefault();
+                    }}
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
@@ -101,7 +108,7 @@ export default class AddSize extends Component {
                   <Label>Amount</Label>
                   <Input
                     required
-                    type="amount"
+                    type="number"
                     name="amount"
                     placeholder="Enter Amount"
                     value={this.state.amount}
@@ -151,7 +158,7 @@ export default class AddSize extends Component {
                     type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add
+                    Add Plan
                   </Button.Ripple>
                 </Col>
               </Row>

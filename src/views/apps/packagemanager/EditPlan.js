@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -13,57 +14,57 @@ import {
   Button,
   Breadcrumb,
   BreadcrumbItem,
-} from 'reactstrap'
-import axiosConfig from '../../../axiosConfig'
-import { history } from '../../../history'
-import swal from 'sweetalert'
+} from "reactstrap";
+import axiosConfig from "../../../axiosConfig";
+import { history } from "../../../history";
+import swal from "sweetalert";
 export default class EditPlan extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      title: '',
-      amount: '',
-      status: '',
-    }
+      title: "",
+      amount: "",
+      status: "",
+    };
   }
 
   componentDidMount() {
-    let { id } = this.props.match.params
+    let { id } = this.props.match.params;
     axiosConfig
       .get(`/admin/getoneplan/${id}`)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         this.setState({
           title: response.data.data.title,
           amount: response.data.data.amount,
           status: response.data.data.status,
-        })
+        });
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
   changeHandler1 = (e) => {
-    this.setState({ status: e.target.value })
-  }
+    this.setState({ status: e.target.value });
+  };
 
   changeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+    this.setState({ [e.target.name]: e.target.value });
+  };
   submitHandler = (e) => {
-    e.preventDefault()
-    let { id } = this.props.match.params
+    e.preventDefault();
+    let { id } = this.props.match.params;
     axiosConfig
       .post(`/admin/editplan/${id}`, this.state)
       .then((response) => {
-        console.log(response)
-        swal('Success!', 'Submitted SuccessFull!', 'success')
-        this.props.history.push('/app/packagemanager/allPlan')
+        console.log(response);
+        swal("Success!", "Submitted SuccessFull!", "success");
+        this.props.history.push("/app/packagemanager/allPlan");
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
   render() {
     return (
       <div>
@@ -90,23 +91,26 @@ export default class EditPlan extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push('/app/packagemanager/allPlan')}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/packagemanager/allPlan")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>title</Label>
+                  <Label>Title</Label>
                   <Input
                     type="text"
                     name="title"
-                    placeholder=""
                     value={this.state.title}
                     onChange={this.changeHandler}
                   ></Input>
@@ -116,7 +120,6 @@ export default class EditPlan extends Component {
                   <Input
                     type="amount"
                     name="amount"
-                    placeholder="Enter Amount"
                     value={this.state.amount}
                     onChange={this.changeHandler}
                   ></Input>
@@ -129,20 +132,20 @@ export default class EditPlan extends Component {
                     onChange={(e) => this.changeHandler1(e)}
                   >
                     <input
-                      style={{ marginRight: '3px' }}
+                      style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
                       value="Active"
                     />
-                    <span style={{ marginRight: '20px' }}>Active</span>
+                    <span style={{ marginRight: "20px" }}>Active</span>
 
                     <input
-                      style={{ marginRight: '3px' }}
+                      style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
                       value="Deactive"
                     />
-                    <span style={{ marginRight: '3px' }}>Deactive</span>
+                    <span style={{ marginRight: "3px" }}>Deactive</span>
                   </div>
                 </Col>
               </Row>
@@ -161,6 +164,6 @@ export default class EditPlan extends Component {
           </CardBody>
         </Card>
       </div>
-    )
+    );
   }
 }

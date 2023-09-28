@@ -12,8 +12,7 @@ import {
   DropdownToggle,
   CustomInput,
 } from "reactstrap";
-// import axiosConfig from "../../../axiosConfig";
-import axios from "axios";
+import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
@@ -45,9 +44,6 @@ class SocialMedia extends React.Component {
         field: "node.rowIndex + 1",
         width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
 
       {
@@ -99,7 +95,7 @@ class SocialMedia extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Route
+              {/* <Route
                 render={({ history }) => (
                   <Eye
                     className="mr-50"
@@ -112,7 +108,7 @@ class SocialMedia extends React.Component {
                     }
                   />
                 )}
-              />
+              /> */}
               <Route
                 render={({ history }) => (
                   <Edit
@@ -151,7 +147,7 @@ class SocialMedia extends React.Component {
       select_sslmedia: this.state.select_sslmedia,
       url: this.state.url,
     };
-    await axios.post("http://65.2.148.70:8000/admin/add_SocialMedia", payload);
+    await axiosConfig.post("/admin/add_SocialMedia", payload);
     this.getAllData();
     this.setState({ url: "" });
   };
@@ -159,19 +155,17 @@ class SocialMedia extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   getAllData = async () => {
-    await axios
-      .get("http://65.2.148.70:8000/admin/get_socalList")
-      .then((response) => {
-        let rowData = response.data.data;
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/admin/get_socalList").then((response) => {
+      let rowData = response.data.data;
+      this.setState({ rowData });
+    });
   };
   componentDidMount() {
     this.getAllData();
   }
 
   async runthisfunction(id) {
-    await axios.get(`http://65.2.148.70:8000/admin/dlt_socailMedia/${id}`).then(
+    await axiosConfig.get(`/admin/dlt_socailMedia/${id}`).then(
       (response) => {
         console.log(response);
       },
