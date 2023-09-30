@@ -215,12 +215,14 @@ class SocialMedia extends React.Component {
                     name="select_sslmedia"
                     onChange={(e) => this.handleSelect(e)}
                   >
-                    <option>Select Option</option>
-                    <option>Facebook</option>
-                    <option>Twitter</option>
-                    <option>Instagram</option>
-                    <option>Youtube</option>
-                    <option>LinkedIn</option>
+                    <option value="" disabled>
+                      Select Option
+                    </option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="LinkedIn">LinkedIn</option>
                   </CustomInput>
                 </Col>
                 <Col>

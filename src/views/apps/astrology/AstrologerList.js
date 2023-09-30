@@ -10,7 +10,6 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  CustomInput,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
 
@@ -241,7 +240,7 @@ class AstrologerList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Route
+              {/* <Route
                 render={({ history }) => (
                   <Eye
                     className="mr-50"
@@ -254,7 +253,7 @@ class AstrologerList extends React.Component {
                     }
                   />
                 )}
-              />
+              /> */}
               <Route
                 render={({ history }) => (
                   <Edit
@@ -383,21 +382,6 @@ class AstrologerList extends React.Component {
                     Astrologer List
                   </h1>
                 </Col>
-
-                {/* <Col>
-                    <Route
-                      render={({ history }) => (
-                        <Button
-                          className=" btn btn-success float-right"
-                          onClick={() =>
-                            history.push("/app/astrology/addAstrologer")
-                          }
-                        >
-                          Add Astrologer
-                        </Button>
-                      )}
-                    />
-                  </Col> */}
               </Row>
               <div className="container">
                 <Row>

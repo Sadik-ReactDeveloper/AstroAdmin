@@ -12,8 +12,7 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import axiosConfig from "../../../axiosConfig";
-// import { history } from "../../../history";
-// import { data } from "jquery";
+
 import swal from "sweetalert";
 import { Route } from "react-router-dom";
 import Breadcrumbs from "../../../components/@vuexy/breadCrumbs/BreadCrumb";
@@ -24,6 +23,7 @@ export default class EditAstrologer extends Component {
     this.state = {
       approvedstatus: "",
       status: "",
+      fullname: "",
     };
   }
   changeHandler1 = (e) => {
@@ -42,7 +42,11 @@ export default class EditAstrologer extends Component {
     axiosConfig
       .get(`/admin/getoneAstro/${id}`)
       .then((response) => {
-        this.setState({ data: response.data.data });
+        console.log(response.data.data);
+        this.setState({
+          data: response.data.data,
+          fullname: response.data.data.fullname,
+        });
       })
       .catch((error) => {
         console.log(error.response);
@@ -64,7 +68,6 @@ export default class EditAstrologer extends Component {
     axiosConfig
       .post(`/admin/updteApprovedsts/${id}`, this.state)
       .then((response) => {
-        console.log(">>>>", response.data);
         swal("Success!", "Submitted SuccessFull!", "success");
         this.props.history.push(`/app/astrology/astrologerList`);
       })
@@ -117,7 +120,7 @@ export default class EditAstrologer extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Live Status</Label>
                   <div
                     className="form-label-group"
@@ -139,6 +142,16 @@ export default class EditAstrologer extends Component {
                     />
                     <span style={{ marginRight: "3px" }}>Offline</span>
                   </div>
+                </Col> */}
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label className="mb-1">Full Name</Label>
+                  <Input
+                    style={{ marginRight: "3px" }}
+                    type="text"
+                    name="fullname"
+                    disabled
+                    value={this.state.fullname}
+                  />
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>
