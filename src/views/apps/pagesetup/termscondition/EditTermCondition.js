@@ -1,21 +1,25 @@
 import React from "react";
 import { Card, CardBody, Col, Row, Form, Button, Label } from "reactstrap";
 import "react-toastify/dist/ReactToastify.css";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  ContentState,
+  EditorState,
+  convertFromHTML,
+  convertToRaw,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../assets/scss/plugins/extensions/editor.scss";
 import axiosConfig from "../../../../axiosConfig";
 import { history } from "../../../../history";
-import swal from "sweetalert";
 
 class AddTermsCondition extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      desc: "",
       editorState: EditorState.createEmpty(),
+      desc: "",
     };
   }
 
@@ -44,15 +48,19 @@ class AddTermsCondition extends React.Component {
       desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
   };
-
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
       .get(`/admin/getone_term_cond/${id}`)
       .then((response) => {
-        console.log(response.data.data.desc);
+        const description = response.data.data.desc;
+        const contentState = ContentState.createFromBlockArray(
+          convertFromHTML(description)
+        );
+        const editorState = EditorState.createWithContent(contentState);
         this.setState({
-          desc: response.data.data.desc,
+          desc: description,
+          editorState: editorState,
         });
       })
       .catch((error) => {
@@ -102,15 +110,16 @@ class AddTermsCondition extends React.Component {
         </Row>
         <CardBody>
           <Form onSubmit={this.submitHandler}>
-            <Col lg="12" md="12" sm="12" className="mb-2">
+            {/* <Col lg="12" md="12" sm="12" className="mb-2">
               <Label> Description</Label>
-
               <br />
 
               <Editor
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
+                toolbarClassName="demo-toolbar-absolute"
+                editorState={this.state.editorState}
                 toolbar={{
                   inline: { inDropdown: true },
                   list: { inDropdown: true },
@@ -121,6 +130,49 @@ class AddTermsCondition extends React.Component {
                     uploadCallback: this.uploadImageCallBack,
                     previewImage: true,
                     alt: { present: true, mandatory: true },
+                  },
+                }}
+              />
+            </Col> */}
+            <Col lg="12" md="4" sm="12" className="mb-2">
+              <Label> Description</Label>
+              <Editor
+                // toolbarClassName="demo-toolbar-absolute"
+                // wrapperClassName="demo-wrapper"
+                // editorClassName="demo-editor"
+                // editorState={this.state.editorState}
+                // onEditorStateChange={this.onEditorStateChange}
+                toolbarClassName="demo-toolbar-absolute"
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                editorState={this.state.editorState}
+                onEditorStateChange={this.onEditorStateChange}
+                toolbar={{
+                  options: ["inline", "blockType", "fontSize", "fontFamily"],
+                  inline: {
+                    options: [
+                      "bold",
+                      "italic",
+                      "underline",
+                      "strikethrough",
+                      "monospace",
+                    ],
+                    bold: { className: "bordered-option-classname" },
+                    italic: { className: "bordered-option-classname" },
+                    underline: { className: "bordered-option-classname" },
+                    strikethrough: {
+                      className: "bordered-option-classname",
+                    },
+                    code: { className: "bordered-option-classname" },
+                  },
+                  blockType: {
+                    className: "bordered-option-classname",
+                  },
+                  fontSize: {
+                    className: "bordered-option-classname",
+                  },
+                  fontFamily: {
+                    className: "bordered-option-classname",
                   },
                 }}
               />
