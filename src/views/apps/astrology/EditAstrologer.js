@@ -119,31 +119,11 @@ export default class EditAstrologer extends Component {
           </Row>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
+              <h5 className="py-2">
+                Note :Change Both Status for Approvel and Online & Offline
+              </h5>
               <Row>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Live Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Online"
-                    />
-                    <span style={{ marginRight: "20px" }}>Online</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Offline"
-                    />
-                    <span style={{ marginRight: "3px" }}>Offline</span>
-                  </div>
-                </Col> */}
-                <Col lg="6" md="6" sm="6" className="mb-2">
+                <Col lg="2" md="2" sm="12" className="mb-2">
                   <Label className="mb-1">Full Name</Label>
                   <Input
                     style={{ marginRight: "3px" }}
@@ -153,8 +133,8 @@ export default class EditAstrologer extends Component {
                     value={this.state.fullname}
                   />
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label className="mb-1">Status</Label>
+                <Col lg="5" md="5" sm="12" className="mb-2">
+                  <Label className="mb-1">Approvel Status</Label>
                   <div
                     className="form-label-group"
                     onChange={(e) => this.changeHandler1(e)}
@@ -174,6 +154,29 @@ export default class EditAstrologer extends Component {
                       value="false"
                     />
                     <span style={{ marginRight: "3px" }}>Inactive</span>
+                  </div>
+                </Col>
+                <Col lg="5" md="5" sm="12" className="mb-2">
+                  <Label className="mb-1">Live of Astrologer Status</Label>
+                  <div
+                    className="form-label-group"
+                    onChange={(e) => this.changeHandler(e)}
+                  >
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Online"
+                    />
+                    <span style={{ marginRight: "20px" }}>Online</span>
+
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Offline"
+                    />
+                    <span style={{ marginRight: "3px" }}>Offline</span>
                   </div>
                 </Col>
               </Row>
